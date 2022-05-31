@@ -24,8 +24,8 @@
                     <td><a class="btn btn-outline-dark btn-sm" href="/image/{{ image.id }}">{{ repo }}</a></td>
                     <td>{{ tag }}</td>
                 {% else %}
-                    <td><a class="btn btn-outline-dark btn-sm" href="/image/{{ image.id }}">{{ None }}</a></td>
-                    <td>{{ None }}</td>
+                    <td><a class="btn btn-outline-dark btn-sm" href="/image/{{ image.id }}">&lt;None&gt;</a></td>
+                    <td>&lt;None&gt;</td>
                 {% endif %}
                 <td><samp>{{ image.id[7:19]|e }}</samp></td>
                 <td>{{ image.attrs.Created|e }}</td>
