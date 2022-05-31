@@ -32,7 +32,7 @@ def volume(id):
 @app.route("/images")
 def images():
     images = client.images.list()
-    images = sorted(images, key=lambda x: x.tags[0])
+    # images = sorted(images, key=lambda x: x.tags[0])
     return render_template("sites/images.html", data=images)
 
 @app.route("/image/<id>")

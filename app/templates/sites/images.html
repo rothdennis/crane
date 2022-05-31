@@ -18,10 +18,15 @@
         <tbody>
             {% for image in data %}
             <tr>
-                {% set repo, tag = image.tags[0].split(':') %}
                 <th scope="row">{{ loop.index }}</th>
-                <td><a class="btn btn-outline-dark btn-sm" href="/image/{{ image.id }}">{{ repo }}</a></td>
-                <td>{{ tag }}</td>
+                {% if image.tags[0] %}
+                    {% set repo, tag = image.tags[0].split(':') %}
+                    <td><a class="btn btn-outline-dark btn-sm" href="/image/{{ image.id }}">{{ repo }}</a></td>
+                    <td>{{ tag }}</td>
+                {% else %}
+                    <td><a class="btn btn-outline-dark btn-sm" href="/image/{{ image.id }}">{{ None }}</a></td>
+                    <td>{{ None }}</td>
+                {% endif %}
                 <td><samp>{{ image.id[7:19]|e }}</samp></td>
                 <td>{{ image.attrs.Created|e }}</td>
                 <td>

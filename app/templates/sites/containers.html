@@ -22,24 +22,24 @@
                 <td><samp>{{ container.short_id|e }}</samp></td>
                 <td>
                     {% if 'created' in container.status %}
-                    <span class="badge bg-warning">{{ container.status|e }}</span>
+                    <span class="badge bg-warning">{{ container.status|e|upper }}</span>
                     {% elif 'restarting' in container.status %}
-                    <span class="badge bg-warning">{{ container.status|e }}</span>
+                    <span class="badge bg-warning">{{ container.status|e|upper }}</span>
                     {% elif 'running' in container.status %}
-                    <span class="badge bg-success">{{ container.status|e }}</span>
+                    <span class="badge bg-success">{{ container.status|e|upper }}</span>
                     {% elif 'removing' in container.status %}
-                    <span class="badge bg-danger">{{ container.status|e }}</span>
+                    <span class="badge bg-danger">{{ container.status|e|upper }}</span>
                     {% elif 'paused' in container.status %}
-                    <span class="badge bg-warning">{{ container.status|e }}</span>
+                    <span class="badge bg-warning">{{ container.status|e|upper }}</span>
                     {% elif 'exited' in container.status %}
-                    <span class="badge bg-danger">{{ container.status|e }}</span>
+                    <span class="badge bg-danger">{{ container.status|e|upper }}</span>
                     {% elif 'dead' in container.status %}
-                    <span class="badge bg-danger">{{ container.status|e }}</span>
+                    <span class="badge bg-danger">{{ container.status|e|upper }}</span>
                     {% endif %}
                 </td>
                 <td>
                     {% for port in container.attrs.NetworkSettings.Ports %}
-                    <span class="badge bg-secondary">{{ port|e }}</span>
+                    <span class="badge bg-secondary">{{ port|e|upper }}</span>
                     {% endfor %}
                 </td>
             </tr>
