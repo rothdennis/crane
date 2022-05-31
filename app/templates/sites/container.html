@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ data.name }}</h1>
+
+
+<details>
+    <summary>Raw data</summary>
+    <pre>{{ data.attrs | tojson(4) }}</pre>
+</details>
+
+
+{% endblock %}
