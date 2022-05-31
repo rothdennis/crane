@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Networks</h1>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Driver</th>
+                <th scope="col">Scope</th>
+                <th scope="col">Subnet</th>
+                <th scope="col">Gateway</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for network in data %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td><samp>{{ network.id[:12]|e }}</samp></td>
+                <td>{{ network.name|e }}</td>
+                <td>{{ network.attrs.Driver|e }}</td>
+                <td>{{ network.attrs.Scope|e }}</td>
+                <td>
+                    {% for ipam in network.attrs.IPAM.Config %}
+                    {{ ipam.Subnet|e }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for ipam in network.attrs.IPAM.Config %}
+                    {{ ipam.Gateway|e }}
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

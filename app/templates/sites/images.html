@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Images</h1>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Repository</th>
+                <th scope="col">Tag</th>
+                <th scope="col">ID</th>
+                <th scope="col">Created</th>
+                <th scope="col">Size</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for image in data %}
+            <tr>
+                {% set repo, tag = image.tags[0].split(':') %}
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ repo }}</td>
+                <td>{{ tag }}</td>
+                <td><samp>{{ image.id[7:19]|e }}</samp></td>
+                <td>{{ image.attrs.Created|e }}</td>
+                <td>
+                    {% if image.attrs.Size > 1000000000 %}
+                    {{ (image.attrs.Size / 1000000000) | round(1) }} GB
+                    {% elif image.attrs.Size > 1000000%}
+                    {{ (image.attrs.Size / 1000000) | round(1) }} MB
+                    {% elif image.attrs.Size > 1000 %}
+                    {{ (image.attrs.Size / 1000) | round(1) }} kB
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

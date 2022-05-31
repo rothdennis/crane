@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Containers</h1>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">ID</th>
+                <th scope="col">Status</th>
+                <th scope="col">Ports</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for container in data %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ container.name|e }}</td>
+                <td><samp>{{ container.short_id|e }}</samp></td>
+                <td>
+                    {% if 'created' in container.status %}
+                    <span class="badge bg-warning">{{ container.status|e }}</span>
+                    {% elif 'restarting' in container.status %}
+                    <span class="badge bg-warning">{{ container.status|e }}</span>
+                    {% elif 'running' in container.status %}
+                    <span class="badge bg-success">{{ container.status|e }}</span>
+                    {% elif 'removing' in container.status %}
+                    <span class="badge bg-danger">{{ container.status|e }}</span>
+                    {% elif 'paused' in container.status %}
+                    <span class="badge bg-warning">{{ container.status|e }}</span>
+                    {% elif 'exited' in container.status %}
+                    <span class="badge bg-danger">{{ container.status|e }}</span>
+                    {% elif 'dead' in container.status %}
+                    <span class="badge bg-danger">{{ container.status|e }}</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% for port in container.attrs.NetworkSettings.Ports %}
+                    <span class="badge bg-secondary">{{ port|e }}</span>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
