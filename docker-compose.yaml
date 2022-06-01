@@ -4,7 +4,6 @@ services:
 
   crane:
     image: ghcr.io/rothdennis/crane:latest
-    name: crane
     ports:
       - "8000:8000"
     volumes:

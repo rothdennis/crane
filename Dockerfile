@@ -6,4 +6,4 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 EXPOSE 8000
 COPY . .
-CMD ["python3", "app/main.py"]
+CMD python3 app/main.py
