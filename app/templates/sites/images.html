@@ -7,18 +7,14 @@
     <table class="table table-hover align-middle">
         <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Repository</th>
                 <th scope="col">Tag</th>
-                <th scope="col">ID</th>
-                <th scope="col">Created</th>
                 <th scope="col">Size</th>
             </tr>
         </thead>
         <tbody>
             {% for image in data %}
             <tr>
-                <th scope="row">{{ loop.index }}</th>
                 {% if image.tags[0] %}
                     {% set repo, tag = image.tags[0].split(':') %}
                     <td><a class="btn btn-outline-dark btn-sm" href="/image/{{ image.id }}">{{ repo }}</a></td>
@@ -27,8 +23,6 @@
                     <td><a class="btn btn-outline-dark btn-sm" href="/image/{{ image.id }}">&lt;None&gt;</a></td>
                     <td>&lt;None&gt;</td>
                 {% endif %}
-                <td><samp>{{ image.id[7:19]|e }}</samp></td>
-                <td>{{ image.attrs.Created|e }}</td>
                 <td>
                     {% if image.attrs.Size > 1000000000 %}
                     {{ (image.attrs.Size / 1000000000) | round(1) }} GB

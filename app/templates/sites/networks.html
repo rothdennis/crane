@@ -7,9 +7,7 @@
     <table class="table table-hover align-middle">
         <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">ID</th>
                 <th scope="col">Driver</th>
                 <th scope="col">Scope</th>
                 <th scope="col">Subnet</th>
@@ -19,9 +17,7 @@
         <tbody>
             {% for network in data %}
             <tr>
-                <th scope="row">{{ loop.index }}</th>
                 <td><a class="btn btn-outline-dark btn-sm" href="/network/{{ network.id }}">{{ network.name|e }}</a></td>
-                <td><samp>{{ network.id[:12]|e }}</samp></td>
                 <td>{{ network.attrs.Driver|e }}</td>
                 <td>{{ network.attrs.Scope|e }}</td>
                 <td>

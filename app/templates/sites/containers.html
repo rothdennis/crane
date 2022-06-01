@@ -7,20 +7,17 @@
     <table class="table table-hover align-middle">
         <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">ID</th>
+                <th scope="col">Image</th>
                 <th scope="col">Status</th>
-                <th scope="col">Ports</th>
             </tr>
         </thead>
         <tbody>
             {% for container in data %}
             <tr>
-                <th scope="row">{{ loop.index }}</th>
                 <td><a class="btn btn-outline-dark btn-sm" href="/container/{{ container.id }}">{{ container.name|e
                         }}</a></td>
-                <td><samp>{{ container.short_id|e }}</samp></td>
+                <td>{{ container.attrs.Config.Image }}</td>
                 <td>
                     {% if 'created' in container.status %}
                     <span class="badge bg-warning">{{ container.status|e|upper }}</span>
@@ -37,18 +34,6 @@
                     {% elif 'dead' in container.status %}
                     <span class="badge bg-danger">{{ container.status|e|upper }}</span>
                     {% endif %}
-                </td>
-                <td>
-                    {% for port in container.ports %}
-                        <span class="badge bg-secondary">{{ port|e|upper }}</span>
-                        {% if container.ports[port] %}
-                            &RightArrow;
-                            {% for binds in container.ports[port] %}
-                                <span class="badge bg-secondary">{{ binds.HostIp|e|upper }}:{{ binds.HostPort|e|upper }}</span>
-                            {% endfor %}
-                        {% endif %}
-                        <br>
-                    {% endfor %}
                 </td>
             </tr>
             {% endfor %}
