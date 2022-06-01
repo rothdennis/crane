@@ -1,6 +1,5 @@
-LABEL org.opencontainers.image.source https://github.com/rothdennis/crane
-
 FROM python:3.10-alpine
+LABEL org.opencontainers.image.source https://github.com/rothdennis/crane
 WORKDIR /crane
 # RUN apk add --no-cache gcc musl-dev linux-headers
 COPY requirements.txt requirements.txt
