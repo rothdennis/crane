@@ -1,24 +1,82 @@
 #!/usr/local/bin/python3
 
-from flask import Flask
-from flask import render_template
-
+from flask import Flask, render_template, request, flash, redirect
 import docker
+import secrets
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = secrets.token_urlsafe(128)
 client = docker.from_env()
 
-@app.route("/containers")
-@app.route("/")
+@app.route("/containers", methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST'])
 def containers():
+
+    if action := request.form.get("action", None):
+        print(action)
+        if action == "prune":
+            try:
+                client.containers.get(id).start()
+                flash('Containers successfully pruned', 'success')
+            except Exception as e:
+                flash(e, 'danger')
+
     containers = client.containers.list(all=True)
     containers = sorted(containers, key=lambda x: x.name)
     return render_template("sites/containers.html", data=containers)
 
-@app.route("/container/<id>")
+@app.route("/container/<id>", methods=["GET", "POST"])
 def container(id):
+
+    if action := request.form.get("action", None):
+        print(action)
+        if action == "start":
+            try:
+                client.containers.get(id).start()
+                flash('Container successfully started', 'success')
+            except Exception as e:
+                flash(e, 'danger')
+        elif action == "restart":
+            try:
+                client.containers.get(id).restart()
+                flash('Container successfully restarted', 'success')
+            except Exception as e:
+                flash(e, 'danger')
+        elif action == "pause":
+            try:
+                client.containers.get(id).pause()
+                flash('Container successfully paused', 'success')
+            except Exception as e:
+                flash(e, 'danger')
+        elif action == "unpause":
+            try:
+                client.containers.get(id).unpause()
+                flash('Container successfully unpaused', 'success')
+            except Exception as e:
+                flash(e, 'danger')
+        elif action == "stop":
+            try:
+                client.containers.get(id).stop()
+                flash('Container successfully stopped', 'success')
+            except Exception as e:
+                flash(e, 'danger')
+        elif action == "kill":
+            try:
+                client.containers.get(id).kill()
+                flash('Container successfully killed', 'success')
+            except Exception as e:
+                flash(e, 'danger')
+        elif action == "remove":
+            try:
+                client.containers.get(id).remove()
+                flash('Container successfully removed', 'success')
+                return redirect("/containers")
+            except Exception as e:
+                flash(e, 'danger')
+     
     container = client.containers.get(id)
     return render_template("sites/container.html", data=container)
+
 
 @app.route("/volumes")
 def volumes():
