@@ -16,7 +16,7 @@ def containers():
         print(action)
         if action == "prune":
             try:
-                client.containers.get(id).start()
+                client.containers.prune()
                 flash('Containers successfully pruned', 'success')
             except Exception as e:
                 flash(e, 'danger')
