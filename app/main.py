@@ -88,8 +88,18 @@ def container(id):
     container = client.containers.get(id)
     return render_template("sites/container.html", data=container)
 
-@app.route("/volumes")
+@app.route("/volumes", methods=['GET', 'POST'])
 def volumes():
+
+    if action := request.form.get("action", None):
+        print(action)
+        if action == "prune":
+            try:
+                client.volumes.prune()
+                flash('Volumes successfully pruned', 'success')
+            except Exception as e:
+                flash(e, 'danger')
+    
     volumes = client.volumes.list()
     volumes = sorted(volumes, key=lambda x: x.name)
     return render_template("sites/volumes.html", data=volumes)
@@ -99,8 +109,18 @@ def volume(id):
     volume = client.volumes.get(id)
     return render_template("sites/volume.html", data=volume)
 
-@app.route("/images")
+@app.route("/images", methods=['GET', 'POST'])
 def images():
+
+    if action := request.form.get("action", None):
+        print(action)
+        if action == "prune":
+            try:
+                client.images.prune()
+                flash('Images successfully pruned', 'success')
+            except Exception as e:
+                flash(e, 'danger')
+
     images = client.images.list()
     images = sorted(images, key=lambda x: x.tags[0])
     return render_template("sites/images.html", data=images)
@@ -110,8 +130,18 @@ def image(id):
     image = client.images.get(id)
     return render_template("sites/image.html", data=image)
 
-@app.route("/networks")
+@app.route("/networks", methods=['GET', 'POST'])
 def networks():
+
+    if action := request.form.get("action", None):
+        print(action)
+        if action == "prune":
+            try:
+                client.networks.prune()
+                flash('Networks successfully pruned', 'success')
+            except Exception as e:
+                flash(e, 'danger')
+
     networks = client.networks.list()
     networks = sorted(networks, key=lambda x: x.name)
     return render_template("sites/networks.html", data=networks)
