@@ -2,12 +2,22 @@
 
 Web UI for Docker
 
-## Build container images
+## Installation
+
+### via CLI
 
 ```
-docker build -t crane:0.1 -t crane:latest .
+docker run -d -p 9000:8000 -v /var/run/docker.sock:/var/run/docker.sock ghcr.io/rothdennis/crane:latest
 ```
 
+### via `docker-compose`
+
 ```
-docker run -d -p 9000:8000 -v /var/run/docker.sock:/var/run/docker.sock crane:latest
+services:
+  crane:
+    image: ghcr.io/rothdennis/crane:latest
+    ports:
+      - "8000:8000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 ```
