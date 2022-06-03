@@ -8,8 +8,19 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_urlsafe(128)
 client = docker.from_env()
 
+@app.route("/", methods=['GET'])
+def index():
+    containers = client.containers.list(all=True)
+    containers = sorted(containers, key=lambda x: x.name)
+    volumes = client.volumes.list()
+    volumes = sorted(volumes, key=lambda x: x.name)
+    images = client.images.list()
+    images = sorted(images, key=lambda x: x.tags[0])
+    networks = client.networks.list()
+    networks = sorted(networks, key=lambda x: x.name)
+    return render_template("sites/index.html", containers=containers, volumes=volumes, images=images, networks=networks)
+
 @app.route("/containers", methods=['GET', 'POST'])
-@app.route("/", methods=['GET', 'POST'])
 def containers():
 
     if action := request.form.get("action", None):
@@ -77,7 +88,6 @@ def container(id):
     container = client.containers.get(id)
     return render_template("sites/container.html", data=container)
 
-
 @app.route("/volumes")
 def volumes():
     volumes = client.volumes.list()
@@ -92,7 +102,7 @@ def volume(id):
 @app.route("/images")
 def images():
     images = client.images.list()
-    # images = sorted(images, key=lambda x: x.tags[0])
+    images = sorted(images, key=lambda x: x.tags[0])
     return render_template("sites/images.html", data=images)
 
 @app.route("/image/<id>")
@@ -110,7 +120,6 @@ def networks():
 def network(id):
     network = client.networks.get(id)
     return render_template("sites/network.html", data=network)
-
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8000)

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Crane 🏗</h1>
+
+<ul class="list-group">
+    <a href="/containers" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+        Containers
+        <span class="badge bg-primary rounded-pill">{{ containers | length }}</span>
+    </a>
+    <a href="/volumes" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+        Volumes
+        <span class="badge bg-primary rounded-pill">{{ volumes | length }}</span>
+    </a>
+    <a href="/networks" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+        Networks
+        <span class="badge bg-primary rounded-pill">{{ networks | length }}</span>
+    </a>
+    <a href="/images" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+        Images
+        <span class="badge bg-primary rounded-pill">{{ images | length }}</span>
+    </a>
+</ul>
+
+{% endblock %}
