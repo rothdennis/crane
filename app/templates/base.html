@@ -17,11 +17,11 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     <!-- MENU -->
 
-    <nav class="navbar navbar-expand-lg bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">🏗</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -32,32 +32,32 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/containers">Container</a>
+                        <a class="nav-link link-light active" href="/containers">Container</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/volumes">Volumes</a>
+                        <a class="nav-link link-light active" href="/volumes">Volumes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/networks">Networks</a>
+                        <a class="nav-link link-light active" href="/networks">Networks</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/images">Images</a>
+                        <a class="nav-link link-light active" href="/images">Images</a>
                     </li>
                     <!-- FOR LATER RELEASES 
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Nodes</a>
+                        <a class="nav-link link-light disabled" href="#">Nodes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Plugins</a>
+                        <a class="nav-link link-light disabled" href="#">Plugins</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Secrets</a>
+                        <a class="nav-link link-light disabled" href="#">Secrets</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Services</a>
+                        <a class="nav-link link-light disabled" href="#">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Swarm</a>
+                        <a class="nav-link link-light disabled" href="#">Swarm</a>
                     </li>
                     -->
                 </ul>
@@ -90,6 +90,27 @@
     </div>
 
     <!-- FOOTER -->
+
+    <footer class="mt-auto text-bg-dark p-3">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a target="_blank" class="nav-link link-light" href="https://github.com/rothdennis/crane">Source Code</a>
+            </li>
+            <li class="nav-item">
+                <a target="_blank" class="nav-link link-light" href="https://github.com/rothdennis/crane/blob/main/LICENSE">License</a>
+            </li>
+            <li class="nav-item">
+                <a target="_blank" class="nav-link link-light" href="https://github.com/rothdennis/crane/issues">Issues</a>
+            </li>
+        </ul>
+
+        <hr>
+
+        <p class="text-center">
+            Developed with ❤️ on GitHub
+        </p>
+        
+    </footer>
 
 </body>
 
